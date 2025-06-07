@@ -1,13 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle, MapPin, Gamepad, Mail, Twitter, Instagram, Facebook } from 'lucide-react';
+import { CheckCircle, MapPin, Gamepad, Mail, Twitter, Instagram, Facebook, ArrowRight } from 'lucide-react';
 import Head from 'next/head';
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
 
 export default function Home() {
   return (
@@ -36,7 +32,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          variants={fadeInUp}
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Conectando doações com quem mais precisa
@@ -68,7 +63,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          variants={fadeInUp}
         >
           <h2 className="text-3xl font-semibold text-center mb-10">
             Como o LoveCycle funciona
@@ -125,7 +119,6 @@ export default function Home() {
   whileInView="visible"
   viewport={{ once: true }}
   transition={{ duration: 0.8, delay: 0.2 }}
-  variants={fadeInUp}
 >
   <h2 className="text-4xl font-bold text-center text-green-700 mb-16">
     Doe em apenas 3 passos
@@ -170,7 +163,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          variants={fadeInUp}
         >
           <h2 className="text-3xl font-semibold text-center mb-12">
             O que dizem sobre o LoveCycle
@@ -209,60 +201,7 @@ export default function Home() {
           </div>
         </motion.section>
 
-        <motion.section
-          className="py-16 px-6 bg-green-50"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          variants={fadeInUp}
-        >
-          <h2 className="text-3xl font-semibold text-center mb-12">
-            Momentos do ciclo do bem
-          </h2>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {[
-              '/img/img1.jpg',
-              '/img/img2.jpg',
-              '/img/img3.jpg',
-              '/img/img4.jpg',
-              '/img/img5.jpg',
-              '/img/img6.jpg',
-            ].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`Galeria ${i + 1}`}
-                className="rounded-lg shadow-md object-cover w-full h-48 hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-              />
-            ))}
-          </div>
-        </motion.section>
 
-        {/* Gamificação Preview */}
-        <motion.section
-          className="py-16 px-6 bg-white"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          variants={fadeInUp}
-        >
-          <h2 className="text-3xl font-semibold text-center mb-10">
-            Gamificação: torne-se um herói da doação
-          </h2>
-          <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-6">
-            <p className="text-lg max-w-xl">
-              Ganhe pontos a cada doação feita, desbloqueie conquistas e veja seu impacto crescer na comunidade.
-            </p>
-            <img
-              src="/img/game.png"
-              alt="Preview da Gamificação"
-              className="w-full max-w-md rounded-xl shadow-lg"
-            />
-          </div>
-        </motion.section>
 
         {/* Contato */}
         <motion.section
@@ -271,7 +210,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          variants={fadeInUp}
         >
           <h2 className="text-3xl font-semibold text-center mb-10">
             Fale conosco

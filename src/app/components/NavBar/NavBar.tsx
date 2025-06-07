@@ -15,8 +15,8 @@ export default function Navbar() {
 
         <nav className="hidden md:flex gap-6 items-center text-gray-700 font-medium">
           <Link href="/about" className="hover:text-green-600">Sobre</Link>
-          <Link href="/como-funciona" className="hover:text-green-600">Como Funciona</Link>
-          <Link href="/ongs" className="hover:text-green-600">ONGs</Link>
+          <Link href="/functtion" className="hover:text-green-600">Como Funciona</Link>
+          <Link href="/game" className="hover:text-green-600">Gameficação</Link>
           <Link href="/contato" className="hover:text-green-600">Contato</Link>
           <Link href="/login" className="ml-4 px-4 py-2 rounded-2xl border border-green-600 text-green-600 hover:bg-green-50 transition">Entrar</Link>
         </nav>
@@ -31,9 +31,9 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="md:hidden px-6 pb-4 space-y-2 text-gray-700 font-medium">
-          <Link href="/sobre" className="block">Sobre</Link>
-          <Link href="/como-funciona" className="block">Como Funciona</Link>
-          <Link href="/ongs" className="block">ONGs</Link>
+          <Link href="/about" className="block">Sobre</Link>
+          <Link href="/functtion" className="block">Como Funciona</Link>
+          <Link href="/game" className="block">ONGs</Link>
           <Link href="/contato" className="block">Contato</Link>
           <Link href="/login" className="block px-4 py-2 border border-green-600 text-green-600 rounded-2xl w-fit">Entrar</Link>
         </div>
