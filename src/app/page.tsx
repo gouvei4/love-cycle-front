@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle, MapPin, Gamepad, Mail, Twitter, Instagram, Facebook, ArrowRight } from 'lucide-react';
 import Head from 'next/head';
+import Link from "next/link";
 
 
 export default function Home() {
@@ -25,7 +26,6 @@ export default function Home() {
 
       <main className="min-h-screen bg-white text-gray-800 flex flex-col">
 
-        {/* Hero */}
         <motion.section
           className="bg-green-100 py-20 px-6 text-center"
           initial="hidden"
@@ -41,22 +41,27 @@ export default function Home() {
             alimentos e objetos com impacto real.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <button
-              className="bg-green-600 text-white px-6 py-3 rounded-2xl hover:bg-green-700 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-400"
-              aria-label="Comece a doar"
-            >
-              Comece a doar
-            </button>
-            <button
-              className="border border-green-600 text-green-600 px-6 py-3 rounded-2xl hover:bg-green-100 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-400"
-              aria-label="Sou ONG"
-            >
-              Sou ONG
-            </button>
+            <Link href="/login-user">
+              <button
+                className="bg-green-600 text-white px-6 py-3 rounded-2xl hover:bg-green-700 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-400"
+                aria-label="Comece a doar"
+              >
+                Comece a doar
+              </button>
+            </Link>
+            <Link href="/login-ong">
+
+              <button
+                className="border border-green-600 text-green-600 px-6 py-3 rounded-2xl hover:bg-green-100 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-400"
+                aria-label="Sou ONG"
+              >
+                Sou ONG
+              </button>
+            </Link>
+
           </div>
         </motion.section>
 
-        {/* Como funciona */}
         <motion.section
           className="py-16 px-6 bg-white flex-grow"
           initial="hidden"
@@ -112,51 +117,49 @@ export default function Home() {
           </div>
         </motion.section>
 
-       {/* Passo a Passo */}
-<motion.section
-  className="py-20 px-6 bg-gradient-to-b from-green-50 to-white"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  transition={{ duration: 0.8, delay: 0.2 }}
->
-  <h2 className="text-4xl font-bold text-center text-green-700 mb-16">
-    Doe em apenas 3 passos
-  </h2>
+        <motion.section
+          className="py-20 px-6 bg-gradient-to-b from-green-50 to-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <h2 className="text-4xl font-bold text-center text-green-700 mb-16">
+            Doe em apenas 3 passos
+          </h2>
 
-  <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-    {[
-      {
-        icon: "🌱",
-        title: "Escolha uma ONG",
-        text: "Explore as ONGs disponíveis na plataforma e selecione aquela que mais ressoa com sua causa.",
-      },
-      {
-        icon: "💬",
-        title: "Converse diretamente",
-        text: "Utilize o chat integrado ou entre em contato usando os dados fornecidos pela ONG.",
-      },
-      {
-        icon: "🎁",
-        title: "Realize a doação",
-        text: "Finalize sua doação com segurança e ajude quem precisa de forma prática e confiável.",
-      },
-    ].map((step, index) => (
-      <motion.div
-        key={index}
-        className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
-        whileHover={{ scale: 1.03 }}
-      >
-        <div className="text-5xl mb-6">{step.icon}</div>
-        <h3 className="text-2xl font-semibold text-green-800 mb-3">{step.title}</h3>
-        <p className="text-gray-600 leading-relaxed">{step.text}</p>
-      </motion.div>
-    ))}
-  </div>
-</motion.section>
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+            {[
+              {
+                icon: "🌱",
+                title: "Escolha uma ONG",
+                text: "Explore as ONGs disponíveis na plataforma e selecione aquela que mais ressoa com sua causa.",
+              },
+              {
+                icon: "💬",
+                title: "Converse diretamente",
+                text: "Utilize o chat integrado ou entre em contato usando os dados fornecidos pela ONG.",
+              },
+              {
+                icon: "🎁",
+                title: "Realize a doação",
+                text: "Finalize sua doação com segurança e ajude quem precisa de forma prática e confiável.",
+              },
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
+                whileHover={{ scale: 1.03 }}
+              >
+                <div className="text-5xl mb-6">{step.icon}</div>
+                <h3 className="text-2xl font-semibold text-green-800 mb-3">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
 
 
-        {/* Depoimentos */}
         <motion.section
           className="py-16 px-6 bg-white"
           initial="hidden"
@@ -203,7 +206,6 @@ export default function Home() {
 
 
 
-        {/* Contato */}
         <motion.section
           className="py-16 px-6 bg-green-50"
           initial="hidden"
@@ -253,7 +255,6 @@ export default function Home() {
           </form>
         </motion.section>
 
-        {/* Footer */}
         <footer className="bg-green-800 text-green-200 py-8">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
             <p>© {new Date().getFullYear()} LoveCycle. Todos os direitos reservados.</p>

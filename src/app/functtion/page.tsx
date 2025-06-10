@@ -10,6 +10,7 @@ import {
   Facebook,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 // Etapas do processo
 const steps = [
@@ -90,18 +91,24 @@ export default function ComoFuncionaPage() {
             </motion.p>
 
             <div className="flex justify-center gap-4 flex-wrap">
+
+            <Link href="/login-user">
               <button
                 className="bg-green-600 text-white px-6 py-3 rounded-2xl hover:bg-green-700 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-400"
                 aria-label="Comece a doar"
               >
                 Comece a doar
               </button>
+              </Link>
+
+            <Link href="/login-ong">
               <button
                 className="border border-green-600 text-green-600 px-6 py-3 rounded-2xl hover:bg-green-100 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-400"
                 aria-label="Sou ONG"
               >
                 Sou ONG
               </button>
+              </Link>
             </div>
           </div>
         </div>

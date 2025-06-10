@@ -17,8 +17,8 @@ export default function Navbar() {
           <Link href="/about" className="hover:text-green-600">Sobre</Link>
           <Link href="/functtion" className="hover:text-green-600">Como Funciona</Link>
           <Link href="/game" className="hover:text-green-600">Gameficação</Link>
-          <Link href="/contato" className="hover:text-green-600">Contato</Link>
-          <Link href="/login" className="ml-4 px-4 py-2 rounded-2xl border border-green-600 text-green-600 hover:bg-green-50 transition">Entrar</Link>
+          <Link href="/contact" className="hover:text-green-600">Contato</Link>
+          <Link href="/login-user" className="ml-4 px-4 py-2 rounded-2xl border border-green-600 text-green-600 hover:bg-green-50 transition">Entrar</Link>
         </nav>
 
         <button
@@ -34,7 +34,7 @@ export default function Navbar() {
           <Link href="/about" className="block">Sobre</Link>
           <Link href="/functtion" className="block">Como Funciona</Link>
           <Link href="/game" className="block">ONGs</Link>
-          <Link href="/contato" className="block">Contato</Link>
+          <Link href="/contact" className="block">Contato</Link>
           <Link href="/login" className="block px-4 py-2 border border-green-600 text-green-600 rounded-2xl w-fit">Entrar</Link>
         </div>
       )}
