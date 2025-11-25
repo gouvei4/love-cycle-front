@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle, MapPin, Gamepad, Mail, Twitter, Instagram, Facebook, ArrowRight } from 'lucide-react';
+import { CheckCircle, MapPin, Gamepad, Twitter, Instagram, Facebook } from 'lucide-react';
 import Head from 'next/head';
 import Link from "next/link";
 

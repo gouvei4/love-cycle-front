@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import {
-  Mail,
   Lock,
   Building2,
   Phone,
