@@ -1,6 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type InputHTMLAttributes,
+  type ReactNode,
+} from "react";
 import {
   Lock,
   Building2,
@@ -30,6 +36,7 @@ export default function ONGRegister() {
   });
 
   const [cnpjFile, setCnpjFile] = useState<File | null>(null);
+
   const onlyNumbers = (value: string) => value.replace(/\D/g, "");
 
   const formatCNPJ = (value: string) => {
@@ -53,7 +60,7 @@ export default function ONGRegister() {
     return v.replace(/^(\d{5})(\d)/, "$1-$2");
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let formattedValue = value;
 
@@ -64,20 +71,20 @@ export default function ONGRegister() {
     setFormData({ ...formData, [name]: formattedValue });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setCnpjFile(e.target.files[0]);
     }
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = (e: FormEvent) => {
     e.preventDefault();
     if (formData.senha !== formData.confirmarSenha) {
       alert("As senhas não coincidem!");
       return;
     }
-    console.log("Dados:", formData);
-    console.log("Arquivo PDF:", cnpjFile);
+    console.log("Dados formulário:", formData);
+    console.log("Arquivo CNPJ:", cnpjFile);
   };
 
   return (
@@ -93,28 +100,110 @@ export default function ONGRegister() {
             Preencha os dados abaixo e envie o documento oficial do CNPJ
           </p>
 
-          <form onSubmit={handleRegister} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Input label="Nome da ONG" name="nome" icon={<Building2 size={20} />} value={formData.nome} onChange={handleChange} required />
+          <form
+            onSubmit={handleRegister}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <Input
+              label="Nome da ONG"
+              name="nome"
+              icon={<Building2 size={20} />}
+              value={formData.nome}
+              onChange={handleChange}
+              required
+            />
 
-            <Input label="CNPJ" name="cnpj" icon={<Hash size={20} />} value={formData.cnpj} onChange={handleChange} placeholder="00.000.000/0000-00" required />
+            <Input
+              label="CNPJ"
+              name="cnpj"
+              icon={<Hash size={20} />}
+              value={formData.cnpj}
+              onChange={handleChange}
+              placeholder="00.000.000/0000-00"
+              required
+            />
 
-            <Input label="Telefone (WhatsApp)" name="telefone" icon={<Phone size={20} />} value={formData.telefone} onChange={handleChange} placeholder="(00) 00000-0000" required />
+            <Input
+              label="Telefone (WhatsApp)"
+              name="telefone"
+              icon={<Phone size={20} />}
+              value={formData.telefone}
+              onChange={handleChange}
+              placeholder="(00) 00000-0000"
+              required
+            />
 
-            <Input label="CEP" name="cep" icon={<MapPin size={20} />} value={formData.cep} onChange={handleChange} placeholder="00000-000" required />
+            <Input
+              label="CEP"
+              name="cep"
+              icon={<MapPin size={20} />}
+              value={formData.cep}
+              onChange={handleChange}
+              placeholder="00000-000"
+              required
+            />
 
-            <Input label="Logradouro" name="logradouro" value={formData.logradouro} onChange={handleChange} required />
-            <Input label="Bairro" name="bairro" value={formData.bairro} onChange={handleChange} required />
-            <Input label="Cidade" name="cidade" value={formData.cidade} onChange={handleChange} required />
-            <Input label="Estado" name="estado" value={formData.estado} onChange={handleChange} required />
+            <Input
+              label="Logradouro"
+              name="logradouro"
+              value={formData.logradouro}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Bairro"
+              name="bairro"
+              value={formData.bairro}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Cidade"
+              name="cidade"
+              value={formData.cidade}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Estado"
+              name="estado"
+              value={formData.estado}
+              onChange={handleChange}
+              required
+            />
 
-            <Input label="Senha" name="senha" icon={<Lock size={20} />} type="password" value={formData.senha} onChange={handleChange} required />
-            <Input label="Confirmar senha" name="confirmarSenha" icon={<Lock size={20} />} type="password" value={formData.confirmarSenha} onChange={handleChange} required />
+            <Input
+              label="Senha"
+              name="senha"
+              type="password"
+              icon={<Lock size={20} />}
+              value={formData.senha}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Confirmar senha"
+              name="confirmarSenha"
+              type="password"
+              icon={<Lock size={20} />}
+              value={formData.confirmarSenha}
+              onChange={handleChange}
+              required
+            />
 
             <div className="md:col-span-2">
-              <label className="block mb-1 text-sm font-medium text-gray-700">Documento oficial CNPJ (PDF)</label>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                Documento oficial CNPJ (PDF)
+              </label>
               <div className="border border-dashed border-gray-300 p-4 rounded-xl flex items-center">
                 <FileText className="text-gray-400 mr-3" size={22} />
-                <input type="file" accept="application/pdf" required onChange={handleFileChange} className="text-sm flex-1" />
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  required
+                  onChange={handleFileChange}
+                  className="text-sm flex-1"
+                />
               </div>
               {cnpjFile && (
                 <p className="text-green-700 text-sm mt-1 truncate">
@@ -123,14 +212,22 @@ export default function ONGRegister() {
               )}
             </div>
 
-            <button type="submit" className="md:col-span-2 bg-green-600 hover:bg-green-700 text-white text-lg py-3 rounded-xl font-semibold shadow-md transition">
+            <button
+              type="submit"
+              className="md:col-span-2 bg-green-600 hover:bg-green-700 text-white text-lg py-3 rounded-xl font-semibold shadow-md transition"
+            >
               Registrar ONG
             </button>
           </form>
 
           <p className="text-center text-sm text-gray-600 mt-6">
             Já tem uma conta?{" "}
-            <Link href="/login-ong" className="text-green-700 font-semibold hover:underline">Faça login</Link>
+            <Link
+              href="/login-ong"
+              className="text-green-700 font-semibold hover:underline"
+            >
+              Faça login
+            </Link>
           </p>
         </div>
       </section>
@@ -138,14 +235,25 @@ export default function ONGRegister() {
   );
 }
 
-function Input({ label, icon, ...props }: any) {
+/* ---------------- COMPONENTE INPUT TIPADO ---------------- */
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  icon?: ReactNode;
+}
+
+function Input({ label, icon, ...props }: InputProps) {
   const [show, setShow] = useState(false);
-  const type = props.type === "password" && show ? "text" : props.type || "text";
+
+  const type =
+    props.type === "password" && show ? "text" : props.type || "text";
   const isPassword = props.type === "password";
 
   return (
     <div>
-      <label className="block mb-1 text-sm font-medium text-gray-700">{label}</label>
+      <label className="block mb-1 text-sm font-medium text-gray-700">
+        {label}
+      </label>
       <div className="flex items-center border border-gray-300 rounded-lg px-3 focus-within:ring-2 focus-within:ring-green-600">
         {icon && <span className="text-gray-400 mr-2">{icon}</span>}
 
@@ -156,7 +264,11 @@ function Input({ label, icon, ...props }: any) {
         />
 
         {isPassword && (
-          <button type="button" onClick={() => setShow(!show)} className="text-gray-500 hover:text-green-600 ml-2">
+          <button
+            type="button"
+            onClick={() => setShow(!show)}
+            className="text-gray-500 hover:text-green-600 ml-2"
+          >
             {show ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
         )}

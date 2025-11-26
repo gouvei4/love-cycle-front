@@ -242,7 +242,7 @@ export default function Home() {
                 title: "Realize a doação",
                 text: "Finalize sua doação com segurança e ajude quem precisa de forma prática e confiável.",
               },
-            ].map((step, index) => (
+            ].map((step) => (
               <motion.div
                 key={step.title}
                 className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"

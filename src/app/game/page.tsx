@@ -12,7 +12,6 @@ import {
   Instagram,
   Facebook,
 } from "lucide-react";
-import Link from "next/link";
 import Header from "../components/sideBar/Header";
 
 const heroesTop = [
