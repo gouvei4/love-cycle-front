@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { CheckCircle, MapPin, Gamepad, Twitter, Instagram, Facebook } from 'lucide-react';
 import Head from 'next/head';
 import Link from "next/link";
+import Image from "next/image";
 
 
 export default function Home() {
@@ -192,12 +193,18 @@ export default function Home() {
                 key={name}
                 className="bg-green-50 p-6 rounded-2xl shadow text-center"
               >
-                <img
+                <Image
                   src={avatar}
                   alt={name}
+                  width={80}
+                  height={80}
                   className="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
                 />
-                <p className="italic text-gray-700 mb-3">"{text}"</p>
+
+                <p className="italic text-gray-700 mb-3">
+                  &quot;{text}&quot;
+                </p>
+
                 <strong className="text-green-700">{name}</strong>
               </div>
             ))}
