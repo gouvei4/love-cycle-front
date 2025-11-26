@@ -2,44 +2,76 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, Twitter, Instagram, Facebook, Eye, EyeOff } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Twitter,
+  Instagram,
+  Facebook,
+  Eye,
+  EyeOff,
+} from "lucide-react";
+import Link from "next/link";
+import Header from "../components/sideBar/Header";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // aqui depois você coloca a lógica de autenticação
+    alert("Login de demonstração. Em breve conectamos com o backend 💚");
+  };
+
   return (
-    <>
-      <section className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-20">
+    <main className="min-h-screen flex flex-col bg-white text-gray-900">
+      {/* MENU GLOBAL */}
+      <Header />
+
+      {/* CONTEÚDO */}
+      <section className="flex-grow bg-gradient-to-b from-green-50/80 to-gray-50 py-20">
         <div className="max-w-md mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white p-8 rounded-2xl shadow-xl"
+            className="bg-white p-8 rounded-3xl shadow-xl border border-green-100"
           >
-            <h2 className="text-3xl font-bold text-center mb-6">Acesse sua conta</h2>
+            <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">
+              Acesse sua conta
+            </h2>
+            <p className="text-center text-sm text-gray-600 mb-8">
+              Entre para continuar doando e acompanhando seu impacto pelo
+              LoveCycle.
+            </p>
 
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div>
-                <label className="block mb-1 font-medium text-sm text-gray-700">E-mail</label>
+                <label className="block mb-1 font-medium text-sm text-gray-700">
+                  E-mail
+                </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
                   <input
                     type="email"
                     placeholder="seu@email.com"
-                    className="pl-10 pr-4 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    required
+                    className="pl-10 pr-4 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 font-medium text-sm text-gray-700">Senha</label>
+                <label className="block mb-1 font-medium text-sm text-gray-700">
+                  Senha
+                </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="********"
-                    className="pl-10 pr-10 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    required
+                    className="pl-10 pr-10 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
                   />
                   <button
                     type="button"
@@ -53,39 +85,60 @@ export default function Login() {
                 </div>
               </div>
 
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="text-xs text-green-700 hover:underline"
+                >
+                  Esqueci minha senha
+                </button>
+              </div>
+
               <button
                 type="submit"
-                className="w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition"
+                className="w-full py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 hover:scale-[1.01] transition-transform duration-200 focus:outline-none focus:ring-4 focus:ring-green-400"
               >
                 Entrar
               </button>
 
-              <div className="mt-4 text-center">
-                <a
-                  href="/login-ong"
-                  className="inline-block text-green-600 hover:underline font-semibold cursor-pointer"
-                >
-                  Sou ONG? Clique aqui para realizar o login
-                </a>
+              <div className="mt-4 text-center text-sm text-gray-600">
+                <p className="mb-1">
+                  <Link
+                    href="/login-ong"
+                    className="text-green-700 hover:underline font-semibold"
+                  >
+                    Sou ONG — acessar painel de instituição
+                  </Link>
+                </p>
               </div>
             </form>
 
-            <p className="text-center text-sm text-gray-600 mt-4">
+            <p className="text-center text-sm text-gray-600 mt-6">
               Ainda não tem conta?{" "}
-              <a href="/register-user" className="text-green-600 hover:underline font-medium">
+              <Link
+                href="/register-user"
+                className="text-green-700 hover:underline font-medium"
+              >
                 Cadastre-se
-              </a>
+              </Link>
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Rodapé */}
+      {/* RODAPÉ */}
       <footer className="bg-green-800 text-green-200 py-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
-          <p>
-            © {new Date().getFullYear()} LoveCycle. Todos os direitos reservados.
-          </p>
+          <div>
+            <p className="font-medium">
+              © {new Date().getFullYear()} LoveCycle. Todos os direitos
+              reservados.
+            </p>
+            <p className="text-sm text-green-300 mt-1">
+              Conectando doações com impacto real em comunidades por todo o
+              Brasil.
+            </p>
+          </div>
           <div className="flex gap-6 text-green-300">
             <a
               href="https://twitter.com"
@@ -117,6 +170,6 @@ export default function Login() {
           </div>
         </div>
       </footer>
-    </>
+    </main>
   );
 }

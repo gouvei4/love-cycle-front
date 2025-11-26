@@ -1,5 +1,4 @@
 import '../styles/globals.css';
-import Navbar from './components/NavBar/NavBar';
 
 export const metadata = {
   title: 'LoveCycle',
@@ -9,7 +8,6 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-       <Navbar />
       <body>{children}</body>
     </html>
   );
