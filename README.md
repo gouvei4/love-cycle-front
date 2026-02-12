@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ♻️ LoveCycle Web
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-Framework-black)
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strongly%20Typed-blue)
+![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38B2AC)
+![Framer
+Motion](https://img.shields.io/badge/Animation-Framer%20Motion-purple)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-First, run the development server:
+Landing page institucional da **LoveCycle**, plataforma social que
+conecta pessoas e ONGs para doação de roupas, alimentos e objetos.
 
-```bash
+Projeto desenvolvido com foco em performance, experiência do usuário e
+escalabilidade.
+
+------------------------------------------------------------------------
+
+## 🚀 Sobre o Projeto
+
+A **LoveCycle** é uma plataforma com propósito social que busca
+facilitar doações e gerar impacto positivo através da tecnologia.
+
+Esta aplicação web representa a primeira etapa do ecossistema:
+
+-   ✅ Landing page moderna e responsiva\
+-   ✅ Interface animada e fluida\
+-   ✅ Estrutura preparada para integração futura com backend\
+-   ✅ Base para expansão em aplicação completa (CRUD, geolocalização,
+    IA, gamificação)
+
+------------------------------------------------------------------------
+
+## 🧠 Stack Tecnológica
+
+### Frontend
+
+-   Next.js 15
+-   React 19
+-   TypeScript
+
+### UI & Experiência
+
+-   Tailwind CSS
+-   Framer Motion
+-   Lucide Icons
+-   clsx (gerenciamento de classes)
+
+### Qualidade
+
+-   ESLint
+-   PostCSS
+-   Autoprefixer
+
+------------------------------------------------------------------------
+
+## ⚙️ Como Executar
+
+``` bash
+git clone https://github.com/seu-usuario/carecycle-web.git
+cd carecycle-web
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplicação disponível em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+------------------------------------------------------------------------
 
-## Learn More
+## 🏗 Arquitetura
 
-To learn more about Next.js, take a look at the following resources:
+Estrutura baseada no App Router do Next.js:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   Componentização reutilizável
+-   Estilização com Tailwind
+-   Animações declarativas com Framer Motion
+-   Organização limpa e escalável
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Preparado para futura integração com:
 
-## Deploy on Vercel
+-   Backend Node.js
+-   Banco de dados
+-   Upload de imagens
+-   Sistema de gamificação
+-   Geolocalização
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+------------------------------------------------------------------------
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌍 Visão de Produto
+
+A LoveCycle pretende evoluir para uma plataforma completa contendo:
+
+-   Cadastro de usuários e ONGs
+-   Registro de itens para doação
+-   Sistema de pontuação (gamificação)
+-   Histórico de impacto social
+-   Dashboard administrativo
+
+------------------------------------------------------------------------
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Afonso Gouveia**\
+Engenheiro de Software focado em aplicações escaláveis, impacto social e
+arquitetura moderna.
+
+GitHub: https://github.com/gouvei4
+
+------------------------------------------------------------------------
+
+## 📄 Licença
+
+Distribuído sob a licença MIT.
