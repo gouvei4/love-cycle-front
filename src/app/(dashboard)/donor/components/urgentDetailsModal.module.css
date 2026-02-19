@@ -1,0 +1,176 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  backdrop-filter: blur(8px);
+}
+
+.modal {
+  background: white;
+  width: 95%;
+  max-width: 480px;
+  border-radius: 32px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: #f8fafc;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: #f1f5f9;
+  color: #ef4444;
+}
+
+.urgentHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.urgentBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff7ed;
+  color: #ea580c;
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  border: 1px solid #ffedd5;
+  margin-bottom: 12px;
+}
+
+.urgentHeader h2 {
+  color: #1b4332;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.urgentHeader p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.itemsBox {
+  background: #fff7ed;
+  border: 1px solid #ffedd5;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.itemsHighlight {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.subText {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #b45309;
+  opacity: 0.8;
+}
+
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.infoItem {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.iconCircle {
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoItem strong {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.infoItem p {
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.footer {
+  display: flex;
+  gap: 12px;
+}
+
+.btnDonate {
+  flex: 1;
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btnDonate:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);
+}
+
+.btnShare {
+  background: white;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -1,0 +1,200 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza tudo no eixo X */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.welcome {
+  color: #1a3321;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 70px;
+}
+
+.statCard, .statCardGreen {
+  padding: 35px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover { transform: translateY(-5px); }
+
+.statCardGreen {
+  background-color: #2fb158;
+  border: none;
+  box-shadow: 0 10px 25px -5px rgba(47, 177, 88, 0.3);
+}
+
+.statValue { color: #2fb158; font-size: 3rem; font-weight: 800; }
+.statValueWhite { color: white; font-size: 3rem; font-weight: 800; }
+
+.statTrend { color: #10b981; font-size: 0.85rem; margin-top: 8px; font-weight: 600; }
+.statTrendWhite { color: rgba(255, 255, 255, 0.8); font-size: 0.85rem; margin-top: 8px; }
+
+.mainContent { width: 100%; }
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.btnAcao {
+  background: linear-gradient(135deg, #2fb158, #28a04d);
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(47, 177, 88, 0.2);
+}
+
+.btnAcao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(47, 177, 88, 0.3);
+  filter: brightness(1.1);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.titleGroup { display: flex; align-items: center; gap: 12px; }
+.sectionTitle { font-size: 1.4rem; color: #1a3321; font-weight: 700; }
+
+.btnAddMain {
+  background-color: #ffffff;
+  border: 2px solid #2fb158;
+  color: #2fb158;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnAddMain:hover {
+  background-color: #2fb158;
+  color: white;
+}
+
+.campaignGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.customCard {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  border: 1px solid #fde68a;
+}
+
+.topBar {
+  height: 6px;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.cardBody { padding: 30px; }
+
+.cardHeaderInline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cardTitle { font-size: 1.25rem; font-weight: 700; color: #111827; }
+
+.urgentBadge {
+  background: #fef3c7;
+  color: #d97706;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.cardText { color: #4b5563; line-height: 1.6; margin-bottom: 25px; }
+
+.btnOutline {
+  width: 100%;
+  background: white;
+  border: 1.5px solid #2fb158;
+  color: #2fb158;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnOutline:hover {
+  background: rgba(47, 177, 88, 0.05);
+  transform: scale(1.01);
+}
+
+.badgeEstoque {
+  background-color: #fff3e0;
+  color: #ef6c00;
+  border: 1px solid #ffe0b2;
+}
+
+.badgeMeta {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #bbdefb;
+}
+
+.badgeNormal {
+  background-color: #f5f5f5;
+  color: #616161;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.urgente { background: linear-gradient(90deg, #f59e0b, #ea580c); }
+.estoque { background: #fb923c; }
+.meta { background: #3b82f6; }
+.normal { background: #9ca3af; }

@@ -3,24 +3,31 @@
 import { useState } from "react";
 import { Lock, Mail, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // 1. Importe o useRouter
 import Header from "../components/sideBar/Header";
 
 export default function ONGLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  
+  const router = useRouter(); // 2. Inicialize o router
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Simulação de lógica de autenticação
     console.log("Email:", email, "Senha:", password);
+
+    // 3. Redireciona para a rota do dashboard da ONG
+    // Certifique-se de que a pasta existe em: src/app/dashboard/ong/page.tsx
+    router.push("/dashboard/ong");
   };
 
   return (
     <main className="min-h-screen flex flex-col bg-white text-gray-900">
-      {/* MENU */}
       <Header />
 
-      {/* CONTEÚDO */}
       <section className="flex-grow bg-gradient-to-b from-green-50/80 to-gray-50 py-20 flex justify-center items-center px-4">
         <div className="bg-white p-10 rounded-3xl shadow-xl border border-green-100 w-full max-w-md">
           <h2 className="text-3xl font-extrabold text-center text-green-700 mb-2">
@@ -31,7 +38,6 @@ export default function ONGLogin() {
           </p>
 
           <form onSubmit={handleLogin} className="space-y-6">
-            {/* EMAIL */}
             <div>
               <label className="block mb-1 text-sm font-medium text-gray-700">
                 E-mail
@@ -49,7 +55,6 @@ export default function ONGLogin() {
               </div>
             </div>
 
-            {/* SENHA */}
             <div>
               <label className="block mb-1 text-sm font-medium text-gray-700">
                 Senha
@@ -75,7 +80,6 @@ export default function ONGLogin() {
               </div>
             </div>
 
-            {/* BOTÃO ENTRAR */}
             <button
               type="submit"
               className="w-full py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 hover:scale-[1.02] transition-transform duration-200 focus:outline-none focus:ring-4 focus:ring-green-400"
@@ -107,7 +111,6 @@ export default function ONGLogin() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="bg-green-800 text-green-200 py-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
           <p className="font-medium">

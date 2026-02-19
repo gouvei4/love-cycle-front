@@ -1,0 +1,94 @@
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  color: #1b4332;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.donationCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.2s;
+}
+
+.donationCard:hover {
+  transform: translateX(5px);
+  border-color: #28a745;
+}
+
+.mainInfo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.iconWrapper {
+  background: #f0fdf4;
+  color: #28a745;
+  padding: 1rem;
+  border-radius: 16px;
+}
+
+.details h3 {
+  color: #1b4332;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.details p {
+  color: #64748b;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusWrapper {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Status Variants */
+.concluido { background: #dcfce7; color: #166534; }
+.pendente { background: #fef3c7; color: #92400e; }
+.emCaminho { background: #dbeafe; color: #1e40af; }
+
+.xpGained {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

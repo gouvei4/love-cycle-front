@@ -19,16 +19,13 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // aqui depois você coloca a lógica de autenticação
     alert("Login de demonstração. Em breve conectamos com o backend 💚");
   };
 
   return (
     <main className="min-h-screen flex flex-col bg-white text-gray-900">
-      {/* MENU GLOBAL */}
       <Header />
 
-      {/* CONTEÚDO */}
       <section className="flex-grow bg-gradient-to-b from-green-50/80 to-gray-50 py-20">
         <div className="max-w-md mx-auto px-6">
           <motion.div
@@ -126,7 +123,6 @@ export default function Login() {
         </div>
       </section>
 
-      {/* RODAPÉ */}
       <footer className="bg-green-800 text-green-200 py-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
           <div>

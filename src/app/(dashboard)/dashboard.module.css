@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fcf9;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #ffffff;
+  border-right: 1px solid #e9ecef;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  color: #1b4332;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.navItem:hover, .active {
+  background-color: #d1e7dd;
+  color: #1b4332;
+}
+
+.main {
+  flex: 1;
+  margin-left: 260px;
+  padding: 2rem 3rem;
+}
+
+/* Estilos do Dashboard do Doador */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid #e2e8f0;
+  width: 350px;
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.ongGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.ongCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ongInfo h3 {
+  color: #1b4332;
+  font-size: 1.1rem;
+}
+
+.btnDonatePrimary {
+  margin-top: 1.2rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnDonateSecondary {
+  margin-top: 1.2rem;
+  background-color: transparent;
+  color: #28a745;
+  border: 1px solid #28a745;
+  padding: 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pointsBadge {
+  background-color: #28a745;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

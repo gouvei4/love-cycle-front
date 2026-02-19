@@ -12,7 +12,7 @@ import {
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "./components/sideBar/Header";
+import Header from "./(marketing)/components/sideBar/Header";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -47,10 +47,8 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-white text-gray-800 flex flex-col">
-        {/* HEADER SEPARADO */}
         <Header />
 
-        {/* HERO */}
         <motion.section
           className="bg-gradient-to-b from-green-50 to-white py-20 px-6"
           initial="hidden"
@@ -127,7 +125,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* COMO FUNCIONA */}
         <motion.section
           id="como-funciona"
           className="py-16 px-6 bg-white flex-grow"
@@ -207,7 +204,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* PASSOS */}
         <motion.section
           id="passos"
           className="py-20 px-6 bg-gradient-to-b from-green-50 to-white"
@@ -258,7 +254,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* DEPOIMENTOS */}
         <motion.section
           id="depoimentos"
           className="py-16 px-6 bg-white"
@@ -310,7 +305,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* CONTATO */}
         <motion.section
           id="contato"
           className="py-16 px-6 bg-green-50"
@@ -366,7 +360,6 @@ export default function Home() {
           </form>
         </motion.section>
 
-        {/* FOOTER */}
         <footer className="bg-green-800 text-green-200 py-8">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
             <div>
