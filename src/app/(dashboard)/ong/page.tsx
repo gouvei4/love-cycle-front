@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import styles from './painel.module.css';
-import ModalNovaNecessidade from './components/ModalNovaNecessidade';
-import ModalEditarCampanha from './components/ModalEditarCampanha';
+import ModalNovaNecessidade from './components/modal/ModalNovaNecessidade';
+import ModalEditarCampanha from './components/modal/ModalEditarCampanha';
 
 export default function PainelGeralONG() {
   const [modalAberto, setModalAberto] = useState(false);

@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
-import { AlertTriangle, Trash2, X } from 'lucide-react';
-import styles from './confirmacao.module.css';
+import { Trash2, X } from 'lucide-react';
+import styles from '../confirmacao.module.css';
 
 interface ModalConfirmacaoProps {
   isOpen: boolean;

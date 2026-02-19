@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { AlertCircle, Zap } from 'lucide-react';
-import styles from './modalUrgencia.module.css';
+import styles from '../modalUrgencia.module.css';
 
 interface ModalUrgenciaProps {
   isOpen: boolean;

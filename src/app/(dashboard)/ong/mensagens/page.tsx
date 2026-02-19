@@ -2,43 +2,53 @@
 
 import { useState, useRef, useEffect } from "react";
 import styles from "./messages.module.css";
-import { Search, Send, MoreVertical, CheckCheck } from "lucide-react";
+import { Search, Send, MoreVertical, CheckCheck, User, ShieldCheck } from "lucide-react";
 
-const CHATS_DEMO = [
+interface Message {
+  id: number;
+  text: string;
+  sender: "sent" | "received";
+  time: string;
+}
+
+interface ChatMessages {
+  [key: number]: Message[];
+}
+
+const DOADORES_DEMO = [
   {
     id: 1,
-    ongName: "Abrigo Esperança",
-    lastMessage: "Olá, Afonso! Pode trazer amanhã às 14h?",
-    time: "10:30",
-    unread: 2,
+    nome: "Afonso Gouveia",
+    lastMessage: "Com certeza! Estarei aí nesse horário. Obrigado!",
+    time: "10:32",
+    unread: 0,
     online: true,
-    avatar: "🏢"
+    avatar: "AG"
   },
   {
     id: 2,
-    ongName: "Instituição Mãos Amigas",
-    lastMessage: "Os pontos já foram creditados na sua conta!",
-    time: "Ontem",
-    unread: 0,
+    nome: "João Silva",
+    lastMessage: "Oi, como faço para entregar as fraldas?",
+    time: "09:15",
+    unread: 1,
     online: false,
-    avatar: "🤝"
+    avatar: "JS"
   }
 ];
 
-const INITIAL_MESSAGES = {
+const INITIAL_MESSAGES: ChatMessages = {
   1: [
-    { id: 101, text: "Olá, Afonso! Recebemos sua intenção de doação de Leite em Pó e Fraldas. Pode trazer amanhã às 14h?", sender: "received", time: "10:30" },
-    { id: 102, text: "Com certeza! Estarei aí nesse horário. Obrigado!", sender: "sent", time: "10:32" }
+    { id: 101, text: "Olá, Afonso! Recebemos sua intenção de doação de Leite em Pó e Fraldas. Pode trazer amanhã às 14h?", sender: "sent", time: "10:30" },
+    { id: 102, text: "Com certeza! Estarei aí nesse horário. Obrigado!", sender: "received", time: "10:32" }
   ],
   2: [
-    { id: 201, text: "Oi Afonso, recebemos as roupas que você enviou. Tudo em perfeito estado!", sender: "received", time: "Ontem" },
-    { id: 202, text: "Os pontos já foram creditados na sua conta!", sender: "received", time: "Ontem" }
+    { id: 201, text: "Oi, como faço para entregar as fraldas?", sender: "received", time: "09:15" }
   ]
 };
 
-export default function MessagesPage() {
-  const [activeChat, setActiveChat] = useState(CHATS_DEMO[0]);
-  const [chatMessages, setChatMessages] = useState(INITIAL_MESSAGES);
+export default function OngMessagesPage() {
+  const [activeChat, setActiveChat] = useState(DOADORES_DEMO[0]);
+  const [chatMessages, setChatMessages] = useState<ChatMessages>(INITIAL_MESSAGES);
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -54,37 +64,36 @@ export default function MessagesPage() {
     e.preventDefault();
     if (!inputText.trim()) return;
 
-    const newMessage = {
+    const newMessage: Message = {
       id: Date.now(),
       text: inputText,
-      sender: "sent",
+      sender: "sent", 
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
     setChatMessages(prev => ({
       ...prev,
-      [activeChat.id]: [...(prev[activeChat.id as keyof typeof INITIAL_MESSAGES] || []), newMessage]
+      [activeChat.id]: [...(prev[activeChat.id] || []), newMessage]
     }));
 
     setInputText("");
   };
 
-  const currentMessages = chatMessages[activeChat.id as keyof typeof INITIAL_MESSAGES] || [];
+  const currentMessages = chatMessages[activeChat.id] || [];
 
   return (
     <div className={styles.container}>
-      {/* Barra Lateral */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <h2>Mensagens</h2>
+          <h2>Mensagens Recebidas</h2>
           <div className={styles.searchBox}>
             <Search size={18} />
-            <input type="text" placeholder="Buscar conversa..." />
+            <input type="text" placeholder="Buscar doador..." />
           </div>
         </div>
 
         <div className={styles.chatList}>
-          {CHATS_DEMO.map((chat) => (
+          {DOADORES_DEMO.map((chat) => (
             <div 
               key={chat.id} 
               className={`${styles.chatItem} ${activeChat.id === chat.id ? styles.active : ""}`}
@@ -93,7 +102,7 @@ export default function MessagesPage() {
               <div className={styles.avatar}>{chat.avatar}</div>
               <div className={styles.chatInfo}>
                 <div className={styles.chatRow}>
-                  <span className={styles.ongName}>{chat.ongName}</span>
+                  <span className={styles.ongName}>{chat.nome}</span>
                   <span className={styles.time}>{chat.time}</span>
                 </div>
                 <p className={styles.lastMsg}>{chat.lastMessage}</p>
@@ -103,23 +112,25 @@ export default function MessagesPage() {
         </div>
       </aside>
 
-      {/* Área do Chat Ativo */}
       <main className={styles.chatArea}>
         <header className={styles.chatHeader}>
           <div className={styles.headerInfo}>
-            <div className={styles.avatarSmall}>{activeChat.avatar}</div>
+            <div className={styles.avatarSmall}><User size={20}/></div>
             <div>
-              <h3>{activeChat.ongName}</h3>
+              <h3>{activeChat.nome}</h3>
               <span className={styles.status}>
-                {activeChat.online ? "● Online" : "Offline"}
+                {activeChat.online ? "● Doador Online" : "Offline"}
               </span>
             </div>
           </div>
-          <button className={styles.iconBtn}><MoreVertical /></button>
+          <div style={{ display: 'flex', gap: '10px' }}>
+
+             <button className={styles.iconBtn}><MoreVertical /></button>
+          </div>
         </header>
 
         <div className={styles.messagesContent}>
-          <div className={styles.dateSeparator}>Histórico de Conversa</div>
+          <div className={styles.dateSeparator}>Conversa iniciada em Fev 2026</div>
           
           {currentMessages.map((msg) => (
             <div key={msg.id} className={`${styles.messageBubble} ${msg.sender === 'sent' ? styles.sent : styles.received}`}>
@@ -136,7 +147,7 @@ export default function MessagesPage() {
         <form className={styles.chatInputArea} onSubmit={handleSendMessage}>
           <input 
             type="text" 
-            placeholder="Escreva uma mensagem..." 
+            placeholder="Responder ao doador..." 
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />

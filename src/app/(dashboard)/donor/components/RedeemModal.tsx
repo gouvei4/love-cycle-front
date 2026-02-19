@@ -15,7 +15,6 @@ export default function RedeemModal({ reward, onClose }: { reward: Reward, onClo
   const [step, setStep] = useState<"confirm" | "success">("confirm");
 
   const handleConfirmRedeem = () => {
-    // Aqui você integraria com o seu backend/Firebase para subtrair os pontos
     confetti({
       particleCount: 100,
       spread: 70,

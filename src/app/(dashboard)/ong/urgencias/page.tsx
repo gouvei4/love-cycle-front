@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from './urgencias.module.css';
 import { AlertCircle, CheckCircle2, Clock, Plus } from "lucide-react";
-import ModalNovaUrgencia from "../components/ModalNovaUrgencia";
+import ModalNovaUrgencia from "../components/modal/ModalNovaUrgencia";
 
 export default function UrgenciasPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);

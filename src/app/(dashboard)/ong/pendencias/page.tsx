@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import styles from './PendingDonations.module.css';
-import { ConfirmReceiptModal, RejectDonationModal } from '../components/DonationModals';
+import { ConfirmReceiptModal, RejectDonationModal } from '../components/modal/DonationModals';
 
 export default function PendingDonations() {
   const [donations, setDonations] = useState([
@@ -10,7 +10,6 @@ export default function PendingDonations() {
     { id: 2, item: "Agasalho M", user: "Maria", date: "19/02/2026", pts: 20 },
   ]);
 
-  // Estados para controle dos modais
   const [selectedDonation, setSelectedDonation] = useState<any>(null);
   const [modalType, setModalType] = useState<'confirm' | 'reject' | null>(null);
 

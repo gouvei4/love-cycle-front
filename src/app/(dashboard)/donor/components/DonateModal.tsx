@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./donateModal.module.css";
-import { Send, X, Plus, Minus, Trash2, Clock, Check, PartyPopper } from "lucide-react";
+import { X, Plus, Trash2, Clock, Check, PartyPopper } from "lucide-react";
 import confetti from "canvas-confetti";
 
 const POINT_VALUES = {
@@ -26,8 +26,6 @@ export default function DonateModal({ ongName, onClose }: { ongName: string; onC
   const [customItemName, setCustomItemName] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [userMessage, setUserMessage] = useState("");
-  
-  // NOVO: Estado para a animação do botão final
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {

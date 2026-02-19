@@ -1,13 +1,12 @@
 import styles from "./perfil.module.css";
 import { 
   User, Mail, Phone, MapPin, CreditCard, 
-  Lock, Award, Calendar, Star, Globe 
+  Lock, Calendar, Star, Globe 
 } from "lucide-react";
 
 export default function ProfilePage() {
   return (
     <div className={styles.container}>
-      {/* CABEÇALHO DO PERFIL COM GAMIFICAÇÃO */}
       <header className={styles.profileHeader}>
         <div className={styles.avatarWrapper}>
           <img 
@@ -31,7 +30,6 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      {/* GRID DE IMPACTO SOCIAL (XP E DOAÇÕES) */}
       <section className={styles.statsGrid}>
         <div className={styles.statCard}>
           <span className={styles.statLabel}>XP Total</span>
@@ -51,7 +49,6 @@ export default function ProfilePage() {
         </div>
       </section>
 
-      {/* FORMULÁRIO COMPLETO DE DADOS (BASEADO NO CADASTRO) */}
       <form className={styles.gridForm}>
         <h2 className={styles.formTitle}>Informações Pessoais</h2>
         

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Modals.module.css';
+import styles from '../Modals.module.css';
 
 interface Donation {
   id: number;

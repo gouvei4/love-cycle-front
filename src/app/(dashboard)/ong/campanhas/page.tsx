@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { Plus, Edit, Trash2, Megaphone } from 'lucide-react';
 import styles from './campanhas.module.css';
-import ModalNovaNecessidade from '../components/ModalNovaNecessidade';
-import ModalEditarCampanha from '../components/ModalEditarCampanha';
-import ModalConfirmacao from '../components/ModalConfirmacao'; // Importe o novo componente
+import ModalNovaNecessidade from '../components/modal/ModalNovaNecessidade';
+import ModalEditarCampanha from '../components/modal/ModalEditarCampanha';
+import ModalConfirmacao from '../components/modal/ModalConfirmacao';
 
 export default function CampanhasPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,13 +36,11 @@ export default function CampanhasPage() {
     setIsEditModalOpen(true);
   };
 
-  // Gatilho para abrir o modal de confirmação
   const handleOpenDelete = (id: string) => {
     setIdParaExcluir(id);
     setIsDeleteModalOpen(true);
   };
 
-  // Função que o modal de confirmação chama ao clicar em "Sim"
   const confirmDelete = () => {
     if (idParaExcluir) {
       setCampanhas((prev) => prev.filter((c) => c.id !== idParaExcluir));
