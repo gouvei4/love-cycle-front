@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./perfil.module.css";
 import { 
   User, Mail, Phone, MapPin, CreditCard, 
@@ -9,10 +10,13 @@ export default function ProfilePage() {
     <div className={styles.container}>
       <header className={styles.profileHeader}>
         <div className={styles.avatarWrapper}>
-          <img 
+          <Image 
             src="https://github.com/afonsogouveia.png" 
             alt="Afonso Gouveia" 
-            className={styles.avatar} 
+            width={120} // Defina a largura base
+            height={120} // Defina a altura base
+            className={styles.avatar}
+            priority // Adicione priority para carregar mais rápido (LCP)
           />
           <div className={styles.levelBadge}>
             <Star size={14} fill="#28a745" /> Nível 15

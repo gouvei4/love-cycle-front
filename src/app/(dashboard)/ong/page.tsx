@@ -4,31 +4,61 @@ import React, { useState } from 'react';
 import styles from './painel.module.css';
 import ModalNovaNecessidade from './components/modal/ModalNovaNecessidade';
 import ModalEditarCampanha from './components/modal/ModalEditarCampanha';
+import { ICampanha } from './campanhas/page';
+
+interface NovaCampanhaInput {
+  titulo: string;
+  descricao: string;
+  prioridade: 'normal' | 'urgente' | 'estoque' | 'meta';
+  meta: number;
+  atual: number;
+}
 
 export default function PainelGeralONG() {
   const [modalAberto, setModalAberto] = useState(false);
-  const [campanhaSelecionada, setCampanhaSelecionada] = useState<any>(null);
+  const [campanhaSelecionada, setCampanhaSelecionada] = useState<ICampanha | null>(null);
   const [modalEditarAberto, setModalEditarAberto] = useState(false);
 
-  const salvarEdicao = (campanhaEditada: any) => {
+  const [campanhas, setCampanhas] = useState<ICampanha[]>([
+    { 
+    id: "1",
+    titulo: "Itens de Higiene", 
+    descricao: "Sabonete e Pasta de dente.", 
+    prioridade: "urgente",
+    status: "Ativa",
+    meta: 100,
+    atual: 20,
+    progresso: 20
+  },
+    { 
+    id: "1",
+    titulo: "Itens de Higiene", 
+    descricao: "Sabonete e Pasta de dente.", 
+    prioridade: "urgente",
+    status: "Ativa",
+    meta: 100,
+    atual: 20,
+    progresso: 20
+  }
+  ]);
+
+  const salvarEdicao = (campanhaEditada: ICampanha) => {
     setCampanhas(campanhas.map(c => c.id === campanhaEditada.id ? campanhaEditada : c));
   };
 
-  const excluirCampanha = (id: number) => {
+  const excluirCampanha = (id: string | number) => {
     setCampanhas(campanhas.filter(c => c.id !== id));
+    setModalEditarAberto(false);
   };
 
-  const [campanhas, setCampanhas] = useState([
-    { id: 1, titulo: "Itens de Higiene", descricao: "Sabonete e Pasta de dente.", prioridade: "urgente" },
-    { id: 2, titulo: "Alimentos Secos", descricao: "Arroz, Feijão e Óleo.", prioridade: "normal" }
-  ]);
-
-  const adicionarCampanhaVisual = (novaCampanha: { titulo: string; descricao: string; prioridade: string }) => {
-    const novoItem = {
-      id: Math.random(),
+  const adicionarCampanhaVisual = (novaCampanha: NovaCampanhaInput) => {
+    const novoItem: ICampanha = {
+      id: Math.random().toString(36).substring(2, 9),
+      status: "Ativa",
       ...novaCampanha
     };
     setCampanhas([novoItem, ...campanhas]);
+    setModalAberto(false);
   };
 
   const renderBadge = (prioridade: string) => {
@@ -51,32 +81,15 @@ export default function PainelGeralONG() {
         <p className={styles.subtitle}>Gerencie suas campanhas e acompanhe seu impacto social.</p>
       </header>
 
-      <section className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>Doações Recebidas</span>
-          <h2 className={styles.statValue}>42</h2>
-          <div className={styles.statTrend}>+12% este mês</div>
-        </div>
-
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>Doadores Únicos</span>
-          <h2 className={styles.statValue}>18</h2>
-          <div className={styles.statTrend}>Novos parceiros</div>
-        </div>
-
-        <div className={styles.statCardGreen}>
-          <span className={styles.statLabelWhite}>Itens Urgentes</span>
-          <h2 className={styles.statValueWhite}>05</h2>
-          <div className={styles.statTrendWhite}>Ações prioritárias</div>
-        </div>
-      </section>
-
       <main className={styles.mainContent}>
         <div className={styles.sectionHeader}>
           <div className={styles.titleGroup}>
             <span className={styles.urgentIcon}>⚠️</span>
             <h2 className={styles.sectionTitle}>Suas Campanhas Ativas</h2>
           </div>
+          <button className={styles.btnPrimary} onClick={() => setModalAberto(true)}>
+            + Nova Campanha
+          </button>
         </div>
 
         <div className={styles.campaignGrid}>
@@ -102,13 +115,6 @@ export default function PainelGeralONG() {
                   >
                     Editar Detalhes
                   </button>
-                  <ModalEditarCampanha
-                    isOpen={modalEditarAberto}
-                    onClose={() => setModalEditarAberto(false)}
-                    campanha={campanhaSelecionada}
-                    onSalvar={salvarEdicao}
-                    onExcluir={excluirCampanha}
-                  />
                 </div>
               </div>
             </div>
@@ -121,6 +127,16 @@ export default function PainelGeralONG() {
         onClose={() => setModalAberto(false)}
         onAdicionar={adicionarCampanhaVisual}
       />
+
+      {campanhaSelecionada && (
+        <ModalEditarCampanha
+          isOpen={modalEditarAberto}
+          onClose={() => setModalEditarAberto(false)}
+          campanha={campanhaSelecionada}
+          onSalvar={salvarEdicao}
+          onExcluir={excluirCampanha}
+        />
+      )}
     </div>
   );
 }

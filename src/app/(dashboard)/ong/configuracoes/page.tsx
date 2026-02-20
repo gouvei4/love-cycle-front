@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styles from './Configuracoes.module.css';
-import { Settings, Save, Building, MapPin} from 'lucide-react';
+import { Settings, Save, Building, MapPin } from 'lucide-react';
 
 export default function ConfiguracoesONG() {
   const [formData, setFormData] = useState({
@@ -15,6 +15,19 @@ export default function ConfiguracoesONG() {
     cidade: "São Paulo",
     cep: "01234-567"
   });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSave = () => {
+    console.log("Dados salvos:", formData);
+    alert("Configurações atualizadas com sucesso!");
+  };
 
   return (
     <div className={styles.container}>
@@ -40,11 +53,21 @@ export default function ConfiguracoesONG() {
             </div>
             <div className={styles.inputGroup}>
               <label>E-mail de Contato</label>
-              <input type="email" value={formData.email} />
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email} 
+                onChange={handleChange} 
+              />
             </div>
             <div className={styles.inputGroup}>
               <label>Telefone/WhatsApp</label>
-              <input type="text" value={formData.telefone} />
+              <input 
+                type="text" 
+                name="telefone"
+                value={formData.telefone} 
+                onChange={handleChange} 
+              />
             </div>
           </div>
         </section>
@@ -57,21 +80,36 @@ export default function ConfiguracoesONG() {
           <div className={styles.grid}>
             <div className={styles.inputGroupFull}>
               <label>Logradouro</label>
-              <input type="text" value={formData.logradouro} />
+              <input 
+                type="text" 
+                name="logradouro"
+                value={formData.logradouro} 
+                onChange={handleChange} 
+              />
             </div>
             <div className={styles.inputGroup}>
               <label>Bairro</label>
-              <input type="text" value={formData.bairro} />
+              <input 
+                type="text" 
+                name="bairro"
+                value={formData.bairro} 
+                onChange={handleChange} 
+              />
             </div>
             <div className={styles.inputGroup}>
               <label>CEP</label>
-              <input type="text" value={formData.cep} />
+              <input 
+                type="text" 
+                name="cep"
+                value={formData.cep} 
+                onChange={handleChange} 
+              />
             </div>
           </div>
         </section>
 
         <footer className={styles.footer}>
-          <button className={styles.btnSave}>
+          <button className={styles.btnSave} onClick={handleSave}>
             <Save size={18} /> Salvar Alterações
           </button>
         </footer>

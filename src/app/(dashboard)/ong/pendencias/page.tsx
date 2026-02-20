@@ -1,19 +1,27 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import styles from './PendingDonations.module.css';
 import { ConfirmReceiptModal, RejectDonationModal } from '../components/modal/DonationModals';
 
+interface DoacaoPendente {
+  id: number;
+  item: string;
+  user: string;
+  date: string;
+  pts: number;
+}
+
 export default function PendingDonations() {
-  const [donations, setDonations] = useState([
+  const [donations, setDonations] = useState<DoacaoPendente[]>([
     { id: 1, item: "Cesta Básica", user: "Afonso", date: "18/02/2026", pts: 50 },
     { id: 2, item: "Agasalho M", user: "Maria", date: "19/02/2026", pts: 20 },
   ]);
 
-  const [selectedDonation, setSelectedDonation] = useState<any>(null);
+  const [selectedDonation, setSelectedDonation] = useState<DoacaoPendente | null>(null);
   const [modalType, setModalType] = useState<'confirm' | 'reject' | null>(null);
 
-  const handleOpenModal = (donation: any, type: 'confirm' | 'reject') => {
+  const handleOpenModal = (donation: DoacaoPendente, type: 'confirm' | 'reject') => {
     setSelectedDonation(donation);
     setModalType(type);
   };

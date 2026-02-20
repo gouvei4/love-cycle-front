@@ -3,10 +3,17 @@ import React, { useState } from 'react';
 import { AlertCircle, Zap } from 'lucide-react';
 import styles from '../modalUrgencia.module.css';
 
+interface UrgenciaInput {
+  titulo: string;
+  descricao: string;
+  nivel: 'critico' | 'normal';
+  criadoEm: string;
+}
+
 interface ModalUrgenciaProps {
   isOpen: boolean;
   onClose: () => void;
-  onPublicar: (urgencia: any) => void;
+  onPublicar: (urgencia: UrgenciaInput) => void;
 }
 
 export default function ModalNovaUrgencia({ isOpen, onClose, onPublicar }: ModalUrgenciaProps) {
@@ -17,12 +24,16 @@ export default function ModalNovaUrgencia({ isOpen, onClose, onPublicar }: Modal
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     onPublicar({
       titulo,
       descricao,
       nivel: 'critico',
       criadoEm: new Date().toISOString()
     });
+    
+    setTitulo('');
+    setDescricao('');
     onClose();
   };
 
@@ -36,7 +47,7 @@ export default function ModalNovaUrgencia({ isOpen, onClose, onPublicar }: Modal
             <AlertCircle color="#e74c3c" size={24} />
             <h2>Nova Urgência Crítica</h2>
           </div>
-          <button className={styles.closeBtn} onClick={onClose}>✕</button>
+          <button className={styles.closeBtn} type="button" onClick={onClose}>✕</button>
         </header>
 
         <form className={styles.form} onSubmit={handleSubmit}>

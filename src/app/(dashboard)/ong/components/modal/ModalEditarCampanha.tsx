@@ -1,28 +1,20 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import styles from '../modal.module.css';
-
-interface Campanha {
-  id: number;
-  titulo: string;
-  descricao: string;
-  prioridade: string;
-  meta: number;   
-  atual: number;   
-}
+import { ICampanha } from '../../campanhas/page';
 
 interface ModalEditarProps {
   isOpen: boolean;
   onClose: () => void;
-  campanha: Campanha | null;
-  onSalvar: (campanha: Campanha) => void;
-  onExcluir: (id: number) => void;
+  campanha: ICampanha | null;
+  onSalvar: (campanha: ICampanha) => void;
+  onExcluir: (id: string) => void;
 }
 
 export default function ModalEditarCampanha({ isOpen, onClose, campanha, onSalvar, onExcluir }: ModalEditarProps) {
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [prioridade, setPrioridade] = useState('');
+  const [prioridade, setPrioridade] = useState<ICampanha['prioridade']>('normal');
   const [meta, setMeta] = useState<number>(0);
   const [atual, setAtual] = useState<number>(0);
 
@@ -30,7 +22,7 @@ export default function ModalEditarCampanha({ isOpen, onClose, campanha, onSalva
     if (campanha) {
       setTitulo(campanha.titulo);
       setDescricao(campanha.descricao);
-      setPrioridade(campanha.prioridade);
+      setPrioridade(campanha.prioridade as ICampanha['prioridade']);
       setMeta(campanha.meta || 0);
       setAtual(campanha.atual || 0);
     }
@@ -45,8 +37,8 @@ export default function ModalEditarCampanha({ isOpen, onClose, campanha, onSalva
       titulo, 
       descricao, 
       prioridade, 
-      meta: Number(meta), 
-      atual: Number(atual) 
+      meta, 
+      atual 
     });
     onClose();
   };
@@ -58,7 +50,7 @@ export default function ModalEditarCampanha({ isOpen, onClose, campanha, onSalva
         
         <header className={styles.header}>
           <h2>Editar Detalhes</h2>
-          <button className={styles.closeBtn} onClick={onClose}>✕</button>
+          <button className={styles.closeBtn} type="button" onClick={onClose}>✕</button>
         </header>
 
         <form className={styles.form} onSubmit={handleSalvar}>
@@ -107,7 +99,11 @@ export default function ModalEditarCampanha({ isOpen, onClose, campanha, onSalva
 
           <div className={styles.inputGroup}>
             <label>Nível de Prioridade</label>
-            <select value={prioridade} onChange={(e) => setPrioridade(e.target.value)} className={styles.selectField}>
+            <select 
+              value={prioridade} 
+              onChange={(e) => setPrioridade(e.target.value as ICampanha['prioridade'])} 
+              className={styles.selectField}
+            >
               <option value="normal">Normal</option>
               <option value="estoque">Estoque Baixo</option>
               <option value="urgente">⚠️ Urgente</option>

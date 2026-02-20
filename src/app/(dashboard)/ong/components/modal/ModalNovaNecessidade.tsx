@@ -2,22 +2,24 @@
 import React, { useState } from 'react';
 import styles from '../modal.module.css';
 
+interface CampanhaInput {
+  titulo: string;
+  descricao: string;
+  prioridade: 'normal' | 'urgente' | 'estoque' | 'meta';
+  meta: number;
+  atual: number;
+}
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAdicionar: (campanha: { 
-    titulo: string; 
-    descricao: string; 
-    prioridade: string;
-    meta: number;
-    atual: number;
-  }) => void;
+  onAdicionar: (campanha: CampanhaInput) => void;
 }
 
 export default function ModalNovaNecessidade({ isOpen, onClose, onAdicionar }: ModalProps) {
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [prioridade, setPrioridade] = useState('normal');
+  const [prioridade, setPrioridade] = useState<CampanhaInput['prioridade']>('normal');
   const [meta, setMeta] = useState<number>(0);
   const [atual, setAtual] = useState<number>(0);
 
@@ -30,8 +32,8 @@ export default function ModalNovaNecessidade({ isOpen, onClose, onAdicionar }: M
       titulo, 
       descricao, 
       prioridade, 
-      meta: Number(meta), 
-      atual: Number(atual) 
+      meta, 
+      atual 
     });
     
     setTitulo(''); 
@@ -48,7 +50,7 @@ export default function ModalNovaNecessidade({ isOpen, onClose, onAdicionar }: M
         <div className={`${styles.topBar} ${styles[prioridade]}`} />
         <header className={styles.header}>
           <h2>Nova Necessidade</h2>
-          <button className={styles.closeBtn} onClick={onClose}>✕</button>
+          <button className={styles.closeBtn} type="button" onClick={onClose}>✕</button>
         </header>
 
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -103,7 +105,7 @@ export default function ModalNovaNecessidade({ isOpen, onClose, onAdicionar }: M
             <label>Nível de Prioridade</label>
             <select 
               value={prioridade} 
-              onChange={(e) => setPrioridade(e.target.value)}
+              onChange={(e) => setPrioridade(e.target.value as CampanhaInput['prioridade'])}
               className={styles.selectField}
             >
               <option value="normal">Normal (Campanha Regular)</option>

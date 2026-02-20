@@ -5,9 +5,25 @@ import styles from './urgencias.module.css';
 import { AlertCircle, CheckCircle2, Clock, Plus } from "lucide-react";
 import ModalNovaUrgencia from "../components/modal/ModalNovaUrgencia";
 
+interface Urgencia {
+    id: string;
+    titulo: string;
+    descricao: string;
+    tempo: string;
+    nivel: 'critico' | 'normal';
+}
+
+interface NovaUrgenciaInput {
+    titulo: string;
+    descricao: string;
+    nivel: 'critico' | 'normal';
+    criadoEm: string;
+}
+
 export default function UrgenciasPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [urgencias, setUrgencias] = useState([
+    
+    const [urgencias, setUrgencias] = useState<Urgencia[]>([
         {
             id: '1',
             titulo: 'Falta de Leite Materno',
@@ -17,13 +33,13 @@ export default function UrgenciasPage() {
         }
     ]);
 
-    const handlePublicarUrgencia = (dados: any) => {
-        const novaUrgencia = {
-            id: Math.random().toString(),
+    const handlePublicarUrgencia = (dados: NovaUrgenciaInput) => {
+        const novaUrgencia: Urgencia = {
+            id: crypto.randomUUID(), 
             titulo: dados.titulo,
             descricao: dados.descricao,
             tempo: 'Agora mesmo',
-            nivel: 'critico'
+            nivel: dados.nivel
         };
 
         setUrgencias((prev) => [novaUrgencia, ...prev]);
@@ -39,7 +55,7 @@ export default function UrgenciasPage() {
             <header className={styles.header}>
                 <div>
                     <h1>🚨 Gerenciar Urgências</h1>
-                    <p>itens de prioridade máxima que aparecem no topo para os doadores.</p>
+                    <p>Itens de prioridade máxima que aparecem no topo para os doadores.</p>
                 </div>
                 <button className={styles.btnUrgente} onClick={() => setIsModalOpen(true)}>
                     <Plus size={20} /> Nova Urgência
@@ -49,28 +65,28 @@ export default function UrgenciasPage() {
             <div className={styles.grid}>
                 {urgencias.map((item) => (
                     <div key={item.id} className={`${styles.card} ${styles[item.nivel]}`}>
-    <div className={styles.cardHeader}>
-        <div className={styles.alertIcon}>
-            <AlertCircle size={24} />
-        </div>
-        <span className={styles.time}><Clock size={14} /> {item.tempo}</span>
-    </div>
-    
-    <div>
-        <h3>{item.titulo}</h3>
-        <p>{item.descricao}</p>
-    </div>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.alertIcon}>
+                                <AlertCircle size={24} />
+                            </div>
+                            <span className={styles.time}><Clock size={14} /> {item.tempo}</span>
+                        </div>
+                        
+                        <div>
+                            <h3>{item.titulo}</h3>
+                            <p>{item.descricao}</p>
+                        </div>
 
-    <div className={styles.cardActions}>
-        <button 
-            className={styles.btnResolver}
-            onClick={() => handleResolver(item.id)}
-        >
-            <CheckCircle2 size={18} /> Resolvido
-        </button>
-        <button className={styles.btnEditar}>Editar</button>
-    </div>
-</div>
+                        <div className={styles.cardActions}>
+                            <button 
+                                className={styles.btnResolver}
+                                onClick={() => handleResolver(item.id)}
+                            >
+                                <CheckCircle2 size={18} /> Resolvido
+                            </button>
+                            <button className={styles.btnEditar}>Editar</button>
+                        </div>
+                    </div>
                 ))}
             </div>
 

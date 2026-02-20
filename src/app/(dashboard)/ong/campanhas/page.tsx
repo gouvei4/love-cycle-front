@@ -7,15 +7,34 @@ import ModalNovaNecessidade from '../components/modal/ModalNovaNecessidade';
 import ModalEditarCampanha from '../components/modal/ModalEditarCampanha';
 import ModalConfirmacao from '../components/modal/ModalConfirmacao';
 
+export interface ICampanha {
+  id: string;
+  titulo: string;
+  descricao: string;
+  prioridade: 'normal' | 'urgente' | 'estoque' | 'meta';
+  status: string;
+  meta: number;
+  atual: number;
+  progresso?: number;
+}
+
+export interface CampanhaInput {
+  titulo: string;
+  descricao: string;
+  prioridade: 'normal' | 'urgente' | 'estoque' | 'meta';
+  meta: number;
+  atual: number;
+}
+
 export default function CampanhasPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   
-  const [campanhaSelecionada, setCampanhaSelecionada] = useState<any>(null);
+  const [campanhaSelecionada, setCampanhaSelecionada] = useState<ICampanha | null>(null);
   const [idParaExcluir, setIdParaExcluir] = useState<string | null>(null);
 
-  const [campanhas, setCampanhas] = useState([
+  const [campanhas, setCampanhas] = useState<ICampanha[]>([
     {
       id: '1',
       titulo: 'Campanha de Agasalho 2026',
@@ -31,7 +50,7 @@ export default function CampanhasPage() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const handleOpenEdit = (campanha: any) => {
+  const handleOpenEdit = (campanha: ICampanha) => {
     setCampanhaSelecionada(campanha);
     setIsEditModalOpen(true);
   };
@@ -49,12 +68,12 @@ export default function CampanhasPage() {
     }
   };
 
-  const handleAddCampaign = (dados: any) => {
+  const handleAddCampaign = (dados: CampanhaInput) => {
     const meta = Number(dados.meta) || 1;
     const atual = Number(dados.atual) || 0;
 
-    const nova = {
-      id: Math.random().toString(),
+    const nova: ICampanha = {
+      id: Math.random().toString(36).substring(2, 9),
       titulo: dados.titulo || 'Nova Campanha',
       descricao: dados.descricao || '',
       prioridade: dados.prioridade || 'normal',
@@ -68,20 +87,20 @@ export default function CampanhasPage() {
     handleCloseModal();
   };
 
-  const handleSaveEdit = (dadosAtualizados: any) => {
-    const meta = Number(dadosAtualizados.meta) || 1;
-    const atual = Number(dadosAtualizados.atual) || 0;
-    const novoProgresso = Math.min(Math.round((atual / meta) * 100), 100);
+  const handleSaveEdit = (campanha: ICampanha) => {
+  const meta = Number(campanha.meta) || 1;
+  const atual = Number(campanha.atual) || 0;
+  const novoProgresso = Math.min(Math.round((atual / meta) * 100), 100);
 
-    setCampanhas((prev) =>
-      prev.map((c) =>
-        c.id === dadosAtualizados.id
-          ? { ...dadosAtualizados, progresso: novoProgresso }
-          : c
-      )
-    );
-    setIsEditModalOpen(false);
-  };
+  setCampanhas((prev) =>
+    prev.map((c) =>
+      c.id === campanha.id
+        ? { ...campanha, progresso: novoProgresso }
+        : c
+    )
+  );
+  setIsEditModalOpen(false);
+};
 
   return (
     <div className={styles.container}>
@@ -146,7 +165,7 @@ export default function CampanhasPage() {
         onAdicionar={handleAddCampaign}
       />
 
-      {isEditModalOpen && (
+      {isEditModalOpen && campanhaSelecionada && (
         <ModalEditarCampanha
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
@@ -156,7 +175,6 @@ export default function CampanhasPage() {
         />
       )}
 
-      {/* NOVO: Modal de Confirmação com animação */}
       <ModalConfirmacao 
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}

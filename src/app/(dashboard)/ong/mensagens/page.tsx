@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import styles from "./messages.module.css";
+// Ícone ShieldCheck agora será utilizado no layout
 import { Search, Send, MoreVertical, CheckCheck, User, ShieldCheck } from "lucide-react";
 
 interface Message {
@@ -15,7 +16,19 @@ interface ChatMessages {
   [key: number]: Message[];
 }
 
-const DOADORES_DEMO = [
+// Adicionada tipagem para os doadores
+interface Doador {
+  id: number;
+  nome: string;
+  lastMessage: string;
+  time: string;
+  unread: number;
+  online: boolean;
+  avatar: string;
+  verificado: boolean; // Nova propriedade para usar o ShieldCheck
+}
+
+const DOADORES_DEMO: Doador[] = [
   {
     id: 1,
     nome: "Afonso Gouveia",
@@ -23,7 +36,8 @@ const DOADORES_DEMO = [
     time: "10:32",
     unread: 0,
     online: true,
-    avatar: "AG"
+    avatar: "AG",
+    verificado: true // Afonso é um doador verificado
   },
   {
     id: 2,
@@ -32,7 +46,8 @@ const DOADORES_DEMO = [
     time: "09:15",
     unread: 1,
     online: false,
-    avatar: "JS"
+    avatar: "JS",
+    verificado: false
   }
 ];
 
@@ -47,7 +62,7 @@ const INITIAL_MESSAGES: ChatMessages = {
 };
 
 export default function OngMessagesPage() {
-  const [activeChat, setActiveChat] = useState(DOADORES_DEMO[0]);
+  const [activeChat, setActiveChat] = useState<Doador>(DOADORES_DEMO[0]);
   const [chatMessages, setChatMessages] = useState<ChatMessages>(INITIAL_MESSAGES);
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -67,7 +82,7 @@ export default function OngMessagesPage() {
     const newMessage: Message = {
       id: Date.now(),
       text: inputText,
-      sender: "sent", 
+      sender: "sent",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
@@ -94,8 +109,8 @@ export default function OngMessagesPage() {
 
         <div className={styles.chatList}>
           {DOADORES_DEMO.map((chat) => (
-            <div 
-              key={chat.id} 
+            <div
+              key={chat.id}
               className={`${styles.chatItem} ${activeChat.id === chat.id ? styles.active : ""}`}
               onClick={() => setActiveChat(chat)}
             >
@@ -115,23 +130,31 @@ export default function OngMessagesPage() {
       <main className={styles.chatArea}>
         <header className={styles.chatHeader}>
           <div className={styles.headerInfo}>
-            <div className={styles.avatarSmall}><User size={20}/></div>
+            <div className={styles.avatarSmall}><User size={20} /></div>
             <div>
-              <h3>{activeChat.nome}</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <h3>{activeChat.nome}</h3>
+                {activeChat.verificado && (
+                  <ShieldCheck
+                    size={18}
+                    color="#28a745"
+                    aria-label="Doador Verificado"
+                  />
+                )}
+              </div>
               <span className={styles.status}>
                 {activeChat.online ? "● Doador Online" : "Offline"}
               </span>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '10px' }}>
-
-             <button className={styles.iconBtn}><MoreVertical /></button>
+            <button className={styles.iconBtn}><MoreVertical /></button>
           </div>
         </header>
 
         <div className={styles.messagesContent}>
           <div className={styles.dateSeparator}>Conversa iniciada em Fev 2026</div>
-          
+
           {currentMessages.map((msg) => (
             <div key={msg.id} className={`${styles.messageBubble} ${msg.sender === 'sent' ? styles.sent : styles.received}`}>
               <p>{msg.text}</p>
@@ -145,9 +168,9 @@ export default function OngMessagesPage() {
         </div>
 
         <form className={styles.chatInputArea} onSubmit={handleSendMessage}>
-          <input 
-            type="text" 
-            placeholder="Responder ao doador..." 
+          <input
+            type="text"
+            placeholder="Responder ao doador..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />

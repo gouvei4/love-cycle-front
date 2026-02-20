@@ -1,9 +1,20 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import styles from "./donateModal.module.css";
 import { X, Plus, Trash2, Clock, Check, PartyPopper } from "lucide-react";
 import confetti from "canvas-confetti";
 
-const POINT_VALUES = {
+type Categoria = "Alimentos" | "Vestuário" | "Higiene" | "Brinquedos" | "Outros";
+
+interface ItemDoacao {
+  id: string;
+  name: string;
+  category: Categoria;
+  quantity: number;
+}
+
+const POINT_VALUES: Record<Categoria, number> = {
   Alimentos: 20,
   Vestuário: 10,
   Higiene: 15,
@@ -11,7 +22,7 @@ const POINT_VALUES = {
   Outros: 10
 };
 
-const CATEGORIES = {
+const CATEGORIES: Record<Exclude<Categoria, "Outros">, string[]> = {
   Alimentos: ["Arroz", "Feijão", "Leite", "Óleo", "Macarrão"],
   Vestuário: ["Camisa", "Calça", "Sapato", "Agasalho"],
   Higiene: ["Sabonete", "Creme Dental", "Fralda", "Absorvente"],
@@ -19,8 +30,9 @@ const CATEGORIES = {
 };
 
 export default function DonateModal({ ongName, onClose }: { ongName: string; onClose: () => void }) {
-  const [selectedCat, setSelectedCat] = useState<keyof typeof CATEGORIES>("Alimentos");
-  const [itemList, setItemList] = useState<any[]>([]);
+  // 2. Estados Tipados
+  const [selectedCat, setSelectedCat] = useState<Categoria>("Alimentos");
+  const [itemList, setItemList] = useState<ItemDoacao[]>([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [isAddingCustom, setIsAddingCustom] = useState(false);
   const [customItemName, setCustomItemName] = useState("");
@@ -30,19 +42,31 @@ export default function DonateModal({ ongName, onClose }: { ongName: string; onC
 
   useEffect(() => {
     const points = itemList.reduce((acc, item) => {
-      const weight = POINT_VALUES[item.category as keyof typeof POINT_VALUES] || 10;
+      const weight = POINT_VALUES[item.category] || 10;
       return acc + (item.quantity * weight);
     }, 0);
+    // Bônus de 50 pontos por doação realizada
     setTotalPoints(points > 0 ? points + 50 : 0);
   }, [itemList]);
 
   const handleAddItem = (itemName: string) => {
     if (!itemName.trim()) return;
-    const existing = itemList.find(i => i.name.toLowerCase() === itemName.toLowerCase() && i.category === selectedCat);
+    
+    const existing = itemList.find(i => 
+      i.name.toLowerCase() === itemName.toLowerCase() && i.category === selectedCat
+    );
+
     if (existing) {
-      setItemList(itemList.map(i => i.id === existing.id ? { ...i, quantity: i.quantity + 1 } : i));
+      setItemList(itemList.map(i => 
+        i.id === existing.id ? { ...i, quantity: i.quantity + 1 } : i
+      ));
     } else {
-      setItemList([...itemList, { id: Math.random().toString(36).substr(2, 9), name: itemName, category: selectedCat, quantity: 1 }]);
+      setItemList([...itemList, { 
+        id: crypto.randomUUID(), 
+        name: itemName, 
+        category: selectedCat, 
+        quantity: 1 
+      }]);
     }
     setIsAddingCustom(false);
     setCustomItemName("");
@@ -87,23 +111,36 @@ export default function DonateModal({ ongName, onClose }: { ongName: string; onC
             <div className={styles.content}>
               <div className={styles.selectionSection}>
                 <label className={styles.label}>O que você está doando?</label>
-                <select className={styles.select} value={selectedCat} onChange={(e) => setSelectedCat(e.target.value as any)}>
-                  {Object.keys(CATEGORIES).map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                <select 
+                  className={styles.select} 
+                  value={selectedCat} 
+                  onChange={(e) => setSelectedCat(e.target.value as Categoria)}
+                >
+                  {Object.keys(POINT_VALUES).map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
                 </select>
 
                 <div className={styles.itemsGrid}>
-                  {CATEGORIES[selectedCat].map(item => (
+                  {selectedCat !== "Outros" && CATEGORIES[selectedCat as keyof typeof CATEGORIES].map(item => (
                     <button key={item} className={styles.miniTag} onClick={() => handleAddItem(item)}>
                       <Plus size={12} /> {item}
                     </button>
                   ))}
+                  
                   {!isAddingCustom ? (
                     <button className={`${styles.miniTag} ${styles.othersTag}`} onClick={() => setIsAddingCustom(true)}>
                       <Plus size={12} /> Algo diferente?
                     </button>
                   ) : (
                     <div className={styles.customItemInput}>
-                      <input autoFocus placeholder="Ex: Tênis..." value={customItemName} onChange={(e) => setCustomItemName(e.target.value)} />
+                      <input 
+                        autoFocus 
+                        placeholder="Ex: Tênis..." 
+                        value={customItemName} 
+                        onChange={(e) => setCustomItemName(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleAddItem(customItemName)}
+                      />
                       <button onClick={() => handleAddItem(customItemName)}><Check size={14} /></button>
                     </div>
                   )}
