@@ -13,10 +13,10 @@ export default function ProfilePage() {
           <Image 
             src="https://github.com/afonsogouveia.png" 
             alt="Afonso Gouveia" 
-            width={120} // Defina a largura base
-            height={120} // Defina a altura base
+            width={120} 
+            height={120} 
             className={styles.avatar}
-            priority // Adicione priority para carregar mais rápido (LCP)
+            priority
           />
           <div className={styles.levelBadge}>
             <Star size={14} fill="#28a745" /> Nível 15
